@@ -2,6 +2,7 @@ from data_manager import DataManager
 from pprint import pprint
 from flight_search import FlightSearch
 import smtplib
+import os
 MY_EMAIL = "opmmzxc8612@gmail.com"
 sheet = DataManager()
 sheet_data = sheet.get_data()
@@ -24,7 +25,7 @@ if sheet_data[0]["iataCode"] != "":
         sheet.update_data(destination["id"],flight.price,flight.out_date,flight.out_arrive,
                           flight.return_date,flight.return_arrive,flight.airline,flight.returnairline)
 
-        MY_PASSWORD = "sjzritrgdtuqiwta"
+        MY_PASSWORD = os.getenv("MY_PASSWORD")
         connection = smtplib.SMTP("smtp.gmail.com",587)
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
